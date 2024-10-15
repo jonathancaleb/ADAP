@@ -1,7 +1,5 @@
 # Agricultural Data Analysis Platform: Coffee Growth Trends in Uganda
 
-![Coffee Agriculture](https://unsplash.com/photos/a-pile-of-coffee-beans-surrounded-by-leaves-2crUwYwFnAg)
-
 ## Project Status
 >
 > **This project is under active development**  
