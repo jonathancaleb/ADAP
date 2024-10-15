@@ -1,5 +1,9 @@
 # Agricultural Data Analysis Platform: Coffee Growth Trends in Uganda
 
+## Read More
+
+For more detailed information about this project, you can read the full documentation [here](https://docs.google.com/document/d/e/2PACX-1vT-IZQuFYBKlHodJV94y82YkorVJ02d8GLV8S-SW68Ui2UmOArPpmTSG0lBpAvcxw/pub).
+
 ## Project Status
 >
 > **This project is under active development**  
