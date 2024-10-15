@@ -1,0 +1,71 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+venv/
+ENV/
+env/
+*.env
+
+# Python packages
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+
+# Data files
+data/raw/              # Raw data (if not tracking input data in version control)
+data/processed/        # Processed data
+
+# Jupyter Notebook metadata and outputs
+*.ipynb
+notebooks/*.ipynb      # If you only want to track the source code, not the notebooks
+notebooks/.ipynb_checkpoints/
+
+# Log files
+*.log
+*.out
+*.err
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Web app files
+web_app/__pycache__/
+web_app/static/*        # Static assets, if built automatically
+
+# Machine Learning / Data Science
+*.h5
+*.hdf5
+*.model
+*.joblib
+*.pkl
+*.csv
+*.tsv
+
+# Compiled source
+*.o
+*.so
+
+# Docker
+*.dockerfile
+
+# Other
+*.bak
+*.swp
+*.tmp
