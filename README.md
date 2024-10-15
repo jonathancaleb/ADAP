@@ -14,6 +14,7 @@
 - [Setup Instructions](#setup-instructions)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
 - [License](#license)
 
 ## Overview
@@ -60,52 +61,55 @@ agricultural-data-analysis-platform/
 │
 ├── requirements.txt            # Python dependencies
 └── README.md                   # Project overview and setup instructions
-Setup Instructions
-Clone the repository:
+```
 
-bash
+## Setup Instructions
+Clone the repository:
+```bash
 git clone https://github.com/yourusername/agricultural-data-analysis-platform.git
 cd agricultural-data-analysis-platform
+```
 
 Install dependencies:
-
-bash
+```bash
 pip install -r requirements.txt
-Data Preparation:
+```
 
-Place raw datasets in the data/raw/ directory.
-Run the data_processing.py script to clean and preprocess the data:
-bash
-Copy code
+### Data Preparation
+Place raw datasets in the `data/raw/` directory.  
+Run the `data_processing.py` script to clean and preprocess the data:
+```bash
 python src/data_processing.py
-Model Training:
+```
 
-Use the model_training.py script to train and evaluate the models:
-bash
-Copy code
+### Model Training
+Use the `model_training.py` script to train and evaluate the models:
+```bash
 python src/model_training.py
-Run the Web Application:
+```
 
+### Run the Web Application
 Start the web application to access interactive visualizations:
-bash
-Copy code
+```bash
 python web_app/app.py
-Open the application in your browser at http://localhost:5000.
-Usage
+```
+Open the application in your browser at [http://localhost:5000](http://localhost:5000).
+
+## Usage
 The platform provides the following functionalities:
+- **Data Insights**: View graphs and charts illustrating trends in coffee growth and yield.
+- **Yield Prediction**: Use predictive models to estimate future yields based on weather and soil data.
+- **Sustainable Farming Recommendations**: Explore suggestions for sustainable farming practices that can be implemented to maximize yield while maintaining environmental integrity.
 
-Data Insights: View graphs and charts illustrating trends in coffee growth and yield.
-Yield Prediction: Use predictive models to estimate future yields based on weather and soil data.
-Sustainable Farming Recommendations: Explore suggestions for sustainable farming practices that can be implemented to maximize yield while maintaining environmental integrity.
-Contributing
+## Contributing
 Contributions are welcome! If you have suggestions, improvements, or new features, please feel free to:
+1. Fork the repository.
+2. Create a new branch.
+3. Make changes and test thoroughly.
+4. Submit a pull request, and I will review it as soon as possible.
 
-Fork the repository.
-Create a new branch.
-Make changes and test thoroughly.
-Submit a pull request, and I will review it as soon as possible.
-Code of Conduct
+## Code of Conduct
 Please ensure that all contributions adhere to the project's Code of Conduct.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
