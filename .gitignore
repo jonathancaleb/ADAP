@@ -46,8 +46,8 @@ Thumbs.db
 *.sublime-project
 
 # Web app files
-web_app/__pycache__/
-web_app/static/*        # Static assets, if built automatically
+web/__pycache__/
+web/static/*        # Static assets, if built automatically
 
 # Machine Learning / Data Science
 *.h5
