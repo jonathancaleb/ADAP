@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+statsmodels
+flask           # or django
+psycopg2-binary # or pymongo for MongoDB
+python-dotenv
+streamlit
