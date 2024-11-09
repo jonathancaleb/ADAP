@@ -8,3 +8,4 @@ flask           # or django
 psycopg2-binary # or pymongo for MongoDB
 python-dotenv
 streamlit
+plotly
