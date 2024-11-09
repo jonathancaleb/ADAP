@@ -37,22 +37,22 @@ class CoffeeGrowthAnalysisPlatform:
         self.create_sidebar()
         
         # Main content
-        if st.session_state.get('current_page') == 'Home':
+        page = st.session_state.get('current_page')
+        if page == 'Home':
             self.show_home_page()
-        elif st.session_state.get('current_page') == 'Data Upload & Analysis':
+        elif page == 'Data Upload & Analysis':
             self.show_data_analysis_page()
-        elif st.session_state.get('current_page') == 'Weather Insights':
+        elif page == 'Weather Insights':
             self.show_weather_insights_page()
-        elif st.session_state.get('current_page') == 'Soil Analysis':
+        elif page == 'Soil Analysis':
             self.show_soil_analysis_page()
-        elif st.session_state.get('current_page') == 'Growth Predictions':
+        elif page == 'Growth Predictions':
             self.show_predictions_page()
-        elif st.session_state.get('current_page') == 'Dashboard':
+        elif page == 'Dashboard':
             self.show_dashboard_page()
 
     def create_sidebar(self):
         with st.sidebar:
-            st.image("https://via.placeholder.com/150", caption="ADAP Logo")
             st.title("Navigation")
             
             pages = {
@@ -89,46 +89,46 @@ class CoffeeGrowthAnalysisPlatform:
     def show_home_page(self):
         st.title("☕ Coffee Growth Analysis Platform")
         
-        # Introduction section
-        col1, col2 = st.columns([2, 1])
-        with col1:
-            st.markdown("""
-            ## Welcome to ADAP
-            The Agricultural Data Analysis Platform (ADAP) helps coffee farmers make 
-            data-driven decisions by analyzing environmental factors affecting coffee growth.
-            
-            ### Key Features:
-            - 📊 Comprehensive data analysis
-            - 🌤️ Weather pattern insights
-            - 🌱 Soil condition monitoring
-            - 📈 Growth predictions
-            - 📱 Real-time monitoring
-            """)
+        # Interactive Map of Uganda with placeholder data
+        st.markdown("### Uganda Coffee Growing Regions and Climate Insights")
+        locations = pd.DataFrame({
+            'Region': ['Region A', 'Region B', 'Region C'],
+            'Latitude': [1.0, 1.5, -0.5],
+            'Longitude': [32.0, 32.5, 31.5],
+            'Avg Temp (°C)': [24, 22, 26],
+            'Soil Quality': ['Good', 'Average', 'Excellent']
+        })
         
-        with col2:
-            # Placeholder for a feature image or stats
-            st.image("https://via.placeholder.com/300x200", caption="Coffee Farm Analytics")
+        fig = px.scatter_mapbox(
+            locations,
+            lat="Latitude",
+            lon="Longitude",
+            text="Region",
+            hover_data={'Avg Temp (°C)': True, 'Soil Quality': True},
+            zoom=6,
+            height=500
+        )
         
-        # Quick start guide
+        fig.update_layout(
+            mapbox_style="open-street-map",
+            title="Map of Uganda with Coffee Growing Regions",
+            margin={"r":0,"t":0,"l":0,"b":0}
+        )
+        
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Overview of insights
         st.markdown("---")
-        st.markdown("## 🚀 Quick Start Guide")
-        
+        st.markdown("### Regional Insights")
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.markdown("""
-            ### 1. Upload Data
-            Upload your farm's environmental data to get started with analysis.
-            """)
+            st.metric("Top Coffee Growing Region", "Region A")
         with col2:
-            st.markdown("""
-            ### 2. Analyze Patterns
-            Explore weather and soil patterns affecting growth.
-            """)
+            st.metric("Optimal Temperature", "24°C")
         with col3:
-            st.markdown("""
-            ### 3. Get Predictions
-            Receive AI-powered growth predictions and recommendations.
-            """)
+            st.metric("Highest Soil Quality", "Excellent")
+        
+        st.info("Add real data to visualize soil quality, temperature ranges, and crop growth regions.")
 
     def show_data_analysis_page(self):
         st.title("📊 Data Upload & Analysis")
@@ -146,7 +146,7 @@ class CoffeeGrowthAnalysisPlatform:
                 st.session_state.data = pd.read_csv(uploaded_file)
                 st.success("Data uploaded successfully!")
                 
-                # Data preview tab
+                # Data preview and summary
                 with st.expander("📝 Data Preview"):
                     st.dataframe(st.session_state.data.head())
                     
@@ -158,7 +158,7 @@ class CoffeeGrowthAnalysisPlatform:
                         st.markdown("#### Missing Values")
                         st.write(st.session_state.data.isnull().sum())
                 
-                # Data visualization section
+                # Visualization Options
                 st.markdown("### 📈 Data Visualization")
                 viz_type = st.selectbox(
                     "Select Visualization Type",
@@ -168,14 +168,9 @@ class CoffeeGrowthAnalysisPlatform:
                 if viz_type == "Correlation Analysis":
                     fig = create_correlation_plot(st.session_state.data)
                     st.plotly_chart(fig, use_container_width=True)
-                
                 elif viz_type == "Time Series":
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        x_col = st.selectbox("Select Time Column", st.session_state.data.columns)
-                    with col2:
-                        y_col = st.selectbox("Select Value Column", st.session_state.data.columns)
-                    
+                    x_col = st.selectbox("Select Time Column", st.session_state.data.columns)
+                    y_col = st.selectbox("Select Value Column", st.session_state.data.columns)
                     fig = create_time_series_plot(st.session_state.data, x_col, y_col)
                     st.plotly_chart(fig, use_container_width=True)
                 
@@ -189,30 +184,18 @@ class CoffeeGrowthAnalysisPlatform:
             st.warning("Please upload data first in the Data Upload & Analysis section.")
             return
         
-        # Weather analysis tabs
-        tab1, tab2, tab3 = st.tabs(["Temperature Analysis", "Rainfall Patterns", "Humidity Trends"])
+        # Temperature and Rainfall Analysis
+        tab1, tab2 = st.tabs(["Temperature Analysis", "Rainfall Patterns"])
         
         with tab1:
-            st.markdown("### Temperature Analysis")
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Average Temperature", "23.5°C", "1.2°C")
-            with col2:
-                st.metric("Temperature Range", "18°C - 29°C", "-2°C")
-            
-            # Placeholder for temperature trend chart
-            st.markdown("#### Temperature Trends")
-            st.line_chart(np.random.randn(20, 2))
+            st.markdown("### Temperature Trends")
+            temp_data = st.session_state.data['temperature'] if 'temperature' in st.session_state.data else np.random.randn(50)
+            st.line_chart(temp_data)
         
         with tab2:
             st.markdown("### Rainfall Patterns")
-            # Add rainfall analysis visualizations here
-            st.info("Rainfall analysis visualizations will be added here")
-        
-        with tab3:
-            st.markdown("### Humidity Trends")
-            # Add humidity analysis visualizations here
-            st.info("Humidity analysis visualizations will be added here")
+            rainfall_data = st.session_state.data['rainfall'] if 'rainfall' in st.session_state.data else np.random.randn(50)
+            st.bar_chart(rainfall_data)
 
     def show_soil_analysis_page(self):
         st.title("🌱 Soil Analysis")
@@ -221,37 +204,21 @@ class CoffeeGrowthAnalysisPlatform:
             st.warning("Please upload data first in the Data Upload & Analysis section.")
             return
         
-        # Soil analysis sections
+        # Soil pH and nutrient analysis
         col1, col2 = st.columns(2)
         
         with col1:
             st.markdown("### Soil pH Levels")
-            # Placeholder for pH level chart
-            st.bar_chart(np.random.randn(10, 1))
+            ph_data = st.session_state.data['soil_ph'] if 'soil_ph' in st.session_state.data else np.random.randn(20)
+            st.bar_chart(ph_data)
             
         with col2:
             st.markdown("### Nutrient Levels")
             nutrients = ['Nitrogen', 'Phosphorus', 'Potassium']
             values = np.random.rand(3) * 100
-            
-            # Create a simple bar chart for nutrients
-            fig = go.Figure(data=[
-                go.Bar(name='Current Level', x=nutrients, y=values)
-            ])
+            fig = go.Figure(data=[go.Bar(name='Nutrients', x=nutrients, y=values)])
             st.plotly_chart(fig)
         
-        # Soil composition analysis
-        st.markdown("### Soil Composition Analysis")
-        composition_data = {
-            'Clay': 30,
-            'Silt': 40,
-            'Sand': 30
-        }
-        
-        fig = go.Figure(data=[go.Pie(labels=list(composition_data.keys()),
-                                    values=list(composition_data.values()))])
-        st.plotly_chart(fig)
-
     def show_predictions_page(self):
         st.title("📈 Growth Predictions")
         
@@ -259,56 +226,27 @@ class CoffeeGrowthAnalysisPlatform:
             st.warning("Please upload data first in the Data Upload & Analysis section.")
             return
         
-        # Model selection and training
         st.markdown("### Model Configuration")
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            model_type = st.selectbox(
-                "Select Model Type",
-                ["Random Forest", "Linear Regression"]
-            )
-            
-        with col2:
-            target_variable = st.selectbox(
-                "Select Target Variable",
-                st.session_state.data.columns
-            )
+        model_type = st.selectbox("Select Model Type", ["Random Forest", "Linear Regression"])
+        target_variable = st.selectbox("Select Target Variable", st.session_state.data.columns)
         
         if st.button("Train Model"):
             with st.spinner("Training model..."):
-                # Placeholder for model training
+                # Mock training and placeholder model training function
+                st.session_state.model = self.predictor.train(st.session_state.data, target_variable)
                 st.success("Model trained successfully!")
         
-        # Predictions section
+        # Prediction Form
         st.markdown("### Make Predictions")
         with st.form("prediction_form"):
-            # Add input fields for prediction
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                temp = st.number_input("Temperature (°C)", value=25.0)
-            with col2:
-                rainfall = st.number_input("Rainfall (mm)", value=100.0)
-            with col3:
-                soil_ph = st.number_input("Soil pH", value=6.5)
-                
+            temp = st.number_input("Temperature (°C)", value=25.0)
+            rainfall = st.number_input("Rainfall (mm)", value=100.0)
+            soil_ph = st.number_input("Soil pH", value=6.5)
             submitted = st.form_submit_button("Get Prediction")
+            
             if submitted:
-                # Placeholder for prediction result
-                st.success("Predicted Growth Rate: 75%")
-                
-                # Show feature importance
-                st.markdown("### Feature Importance")
-                importance_data = {
-                    'Temperature': 0.3,
-                    'Rainfall': 0.4,
-                    'Soil pH': 0.3
-                }
-                fig = go.Figure(data=[
-                    go.Bar(x=list(importance_data.keys()),
-                          y=list(importance_data.values()))
-                ])
-                st.plotly_chart(fig)
+                prediction = self.predictor.predict(temp, rainfall, soil_ph)
+                st.success(f"Predicted Growth Rate: {prediction}%")
 
     def show_dashboard_page(self):
         st.title("📱 Dashboard")
